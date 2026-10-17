@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sajad Gallery</title>
     <style>
-        /* ... (Keep all your existing CSS exactly the same) ... */
         body {
             background-color: #1a1a1e;
             color: #ffffff;
@@ -76,36 +75,40 @@
     </div>
 
     <div class="gallery">
-        <!-- Added ID="card-1" and audio ID -->
+        <!-- Picture 1 -->
         <div class="card" id="card-1" onclick="revealName('card-1', 'audio-1')">
-            <img src="earth.jpg.jpg" alt="Earth">
+            <!-- Notice the image source is exactly earth.jpg -->
+            <img src="earth.jpg" alt="Earth">
             <div class="card-footer">
                 <span class="label">Picture 1</span>
                 <span class="reveal-text" data-name="We live on Earth">Click to reveal</span>
             </div>
         </div>
 
-        <!-- Added ID="card-2" and audio ID -->
+        <!-- Picture 2 -->
         <div class="card" id="card-2" onclick="revealName('card-2', 'audio-2')">
-            <img src="tiger.jpg.jpg" alt="Tiger">
+            <!-- Notice the image source is exactly tiger.jpg -->
+            <img src="tiger.jpg" alt="Tiger">
             <div class="card-footer">
                 <span class="label">Picture 2</span>
                 <span class="reveal-text" data-name="A tiger is a wild animal">Click to reveal</span>
             </div>
         </div>
 
-        <!-- Added ID="card-3" and audio ID -->
+        <!-- Picture 3 -->
         <div class="card" id="card-3" onclick="revealName('card-3', 'audio-3')">
-            <img src="forest.jpg.jpg" alt="Forest">
+            <!-- Notice the image source is exactly forest.jpg -->
+            <img src="forest.jpg" alt="Forest">
             <div class="card-footer">
                 <span class="label">Picture 3</span>
                 <span class="reveal-text" data-name="I went to Golestan Forest last year">Click to reveal</span>
             </div>
         </div>
 
-        <!-- Added ID="card-4" and audio ID -->
+        <!-- Picture 4 -->
         <div class="card" id="card-4" onclick="revealName('card-4', 'audio-4')">
-            <img src="wood.jpg.jpg" alt="Woodcutter">
+            <!-- Notice the image source is exactly wood.jpg -->
+            <img src="wood.jpg" alt="Woodcutter">
             <div class="card-footer">
                 <span class="label">Picture 4</span>
                 <span class="reveal-text" data-name="They are destroying the jungle">Click to reveal</span>
@@ -113,34 +116,27 @@
         </div>
     </div>
 
-    <!-- HIDDEN AUDIO TAGS -->
-    <!-- Make sure the src="" matches your exact audio file names -->
+    <!-- Audio Files -->
     <audio id="audio-1" src="earth.mp3"></audio>
     <audio id="audio-2" src="tiger.mp3"></audio>
     <audio id="audio-3" src="forest.mp3"></audio>
     <audio id="audio-4" src="wood.mp3"></audio>
 
     <script>
-        // Updated function to handle both text and sound
         function revealName(cardId, audioId) {
             const cardElement = document.getElementById(cardId);
             const textElement = cardElement.querySelector('.reveal-text');
             const audioElement = document.getElementById(audioId);
             
-            // 1. Play the sound
+            // Play Sound
             if (audioElement) {
-                // Reset the sound to the beginning in case they click it multiple times fast
                 audioElement.currentTime = 0; 
-                // Play (Note: Browsers usually allow audio to play if triggered by a click)
-                audioElement.play().catch(error => {
-                    console.log("Audio play failed. Make sure the file exists:", error);
-                });
+                audioElement.play().catch(e => console.log("Audio error:", e));
             }
 
-            // 2. Reveal the text (if not already revealed)
+            // Reveal Text
             if (!textElement.classList.contains('revealed')) {
-                const realName = textElement.getAttribute('data-name');
-                textElement.textContent = realName;
+                textElement.textContent = textElement.getAttribute('data-name');
                 textElement.classList.add('revealed');
             }
         }
